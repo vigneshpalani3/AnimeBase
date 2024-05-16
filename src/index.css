@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cabin:ital,wght@0,400..700;1,400..700&family=Caveat:wght@400..700&family=Cinzel:wght@400..900&family=Great+Vibes&family=Inter:wght@100..900&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Jost:ital,wght@0,100..900;1,100..900&family=Lexend:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Oswald:wght@200..700&family=Permanent+Marker&family=Protest+Revolution&family=Protest+Strike&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&family=Shadows+Into+Light&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Cabin", sans-serif;  
+  color: rgb(230, 229, 229);
+}
+
+:root{
+
+  /* COLORS */
+  --white:white;
+  --white-light:rgba(255, 255, 255, 0.597);
+  --black:black;
+  --blue-100:hsl(205, 62%, 85%);
+  --blue-200:hsl(204, 65%, 74%);
+  --blue-300:hsl(204, 69%, 64%);
+  --blue-400:hsl(204, 70%, 56%);
+  --blue-500:hsl(204, 68%, 53%);
+  --blue-600:hsl(204, 77%, 46%);
+  --blue-700:hsl(204, 87%, 34%);
+  --blue-800:hsl(204, 95%, 23%);
+  --blue-900:hsl(204, 97%, 11%);
+
+  /* ANIME ITEM TILE STYLE IN HOME */
+  --it-height:230px;
+  --it-width:140px;
+  --it-row-gap:0.5rem;
+  --it-title-en:1.1rem;
+  --it-title:0.9rem;
+
+  /* PAGE STYLE */
+  --pg-padding:0.8rem;
+  --pg-title:1.4rem;
+  --pg-gap:2.5rem;
+  --details-gap:8px;
+
+  /* BUTTON STYLES */
+  --btn-width:70px;
+  --btn-height:25px;
+
+  /* ITEM IN ANIME ITEM PAGE */
+  --thumb-width:190px;
+  --thumb-height:280px;
+
+  /* FONT SIZE */
+  --fs-xxs:0.8rem;
+  --fs-xs:0.9rem;
+  --fs-s:1rem;
+  --fs-b:1.2rem;
+  --fs-m:1.4rem;
+  --fs-l:1.6rem;
+  --fs-xl:1.8rem;
+}
+
+body{
+  background: url(./images/background.jpg) ;
+  background-size: cover;
+  background-position:center ;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  padding-bottom:16px ;
+}
+input:focus{
+  outline: none;
+}
+
+button{
+  background: none;
+  border: none;
+  cursor: pointer;
+  &:focus{
+    outline: none;
+  }
+}
+
+::-webkit-scrollbar{
+  width: 8px;
+}
+::-webkit-scrollbar-track{
+  background:var(--blue-900);
+}
+::-webkit-scrollbar-thumb{
+  background-color: var(--blue-400);
+  border-radius: 50px;
+}
+
+@media (min-width:760px){
+  :root{
+    --it-height:270px;
+    --it-width:180px;
+    --it-row-gap:1.1rem;
+
+    --pg-padding:1.1rem;
+    --pg-title:1.6rem;
+    --pg-gap:2.5rem;
+    --details-gap:12px;
+
+    /* BUTTON STYLES */
+    --btn-width:90px;
+    --btn-height:28px;
+
+    /* ITEM IN ANIME ITEM PAGE */
+    --thumb-width:220px;
+    --thumb-height:325px;
+
+    /* FONT SIZE */
+    --fs-xxs:0.9rem;
+    --fs-xs:1rem;
+    --fs-s:1.1rem;
+    --fs-b:1.3rem;
+    --fs-m:1.5rem;
+    --fs-l:1.7rem;
+    --fs-xl:1.9rem;
+  }
+}
+
+@media (min-width:980px){
+  :root{
+    --it-height:280px;
+    --it-width:180px;
+    --it-row-gap:1rem;
+
+    --pg-padding:1.8rem;
+    --pg-title:1.6rem;
+    --pg-gap:2.5rem;
+    --details-gap:12px;
+
+    /* BUTTON STYLES */
+    --btn-width:120px;
+    --btn-height:35px;
+
+    /* ITEM IN ANIME ITEM PAGE */
+    --thumb-width:290px;
+    --thumb-height:395px;
+
+    /* FONT SIZE */
+    --fs-xxs:1rem;
+    --fs-xs:1.2rem;
+    --fs-s:1.3rem;
+    --fs-b:1.5rem;
+    --fs-m:1.7rem;
+    --fs-l:1.9rem;
+    --fs-xl:2.1rem;
+  }
+}

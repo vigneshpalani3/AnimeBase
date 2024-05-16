@@ -1,0 +1,68 @@
+.recommend-page{
+  display: grid;
+  grid-template-columns: repeat(auto-fit,1fr);
+  grid-template-rows: repeat(auto-fit,minmax(300px,1fr));
+  padding: var(--fs-s);
+  gap: calc(var(--it-row-gap)*2);
+}
+.entry-item{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--fs-xxs);
+  & img{
+    width: 130px;
+    height: 187px;
+    object-fit: center;
+    object-position: cover;
+  }
+  & h4{
+    font-size:var(--fs-xs) ;
+    color: var(--blue-600);
+    font-weight: 400;
+    padding-inline: 5px;
+  }
+}
+.recommendations{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.recom-item{
+  display: flex;
+  flex-direction: column;
+  gap: var(--fs-s);
+  padding: var(--fs-xxs);
+  background-color:rgb(1, 1, 26);
+  border-radius: 8px;
+  box-shadow: 0 1px 5px rgba(255, 255, 255, 0.227);
+}
+.recom-content{
+  font-size: var(--fs-xxs);
+  line-height: var(--fs-xs);
+  color: var(--blue-100);
+}
+.anime-titles{
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: var(--fs-xs);
+  gap: 8px;
+  & span{
+    color: var(--blue-600);
+  }
+}
+
+@media (min-width:600px){
+  .recom-item{
+    flex-direction: row;
+    align-items: center;
+  }
+  .entry-item img{
+    width: 160px;
+    height: 221px;
+  }
+  .recommend-page{
+    grid-template-columns: repeat(auto-fit,minmax(450px,600px));
+    justify-content: space-evenly;
+  }
+}

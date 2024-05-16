@@ -1,0 +1,40 @@
+header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: 10px;
+  height: 60px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 4;
+  background-color: rgba(0, 0, 31, 0.918);
+  backdrop-filter: blur(8px);
+}
+.logo{
+  display: flex;
+  align-items: center;
+  gap: var(--fs-xxs);
+  & img{
+    width: var(--fs-l);
+    height: var(--fs-l);
+    object-fit: cover;
+    object-position: center;
+  }
+}
+.hamburger{
+  z-index: 5;
+}
+
+.pages{
+  max-width: 1300px;
+  margin-inline: auto;
+  position: relative;
+}
+
+@media (min-width:760px){
+  .logo{
+    font-size: 1.2rem;
+  }
+}

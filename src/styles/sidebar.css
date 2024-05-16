@@ -1,0 +1,30 @@
+.sidebar{
+  height: 90vh;
+  background-color: rgba(0, 0, 0, 0.78);
+  position: fixed;
+  top: 60px;
+  right: 0;
+  width: clamp(250px,80%,450px);
+  display: grid;
+  place-content: center;
+  place-items: center;
+  gap:5%; 
+  transition: right 0.5s ease;
+  backdrop-filter: blur(6px);
+  z-index: 3;
+  &.opened{
+    right:0;
+  }
+  &.closed{
+    right: -100%;
+  }
+}
+.option{
+  border: none;
+  background: none;
+  font-size: clamp(0.9rem,1.7vw,1.5rem);
+  letter-spacing:2px ;
+  &.active{
+    color:rgba(34, 137, 240, 0.788) ;
+  }
+}

@@ -1,0 +1,19 @@
+.char-thumb{
+  width: 130px;
+  height: 190px;
+  object-fit: cover;
+  object-position: center;
+  border: 1px solid rgba(255, 255, 255, 0.752);
+  border-radius: 5px;
+}
+.char-name{
+  font-size: var(--fs-s);
+  color: var(--blue-400);
+}
+.char-role{
+  font-size: var(--fs-xxs);
+  font-weight: 500;
+}
+.char-voice-actor{
+  font-size: var(--fs-xs);
+}

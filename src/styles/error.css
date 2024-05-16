@@ -1,0 +1,26 @@
+.error-box{
+  width: clamp(400px,90%,600px);
+  padding: 2rem;
+  margin: 30px auto;
+  border-radius: 8px;
+  border: 1px solid rgb(244, 64, 44);
+  display: grid;
+  gap: 8px;
+}
+.err-code{
+  font-size: 4rem;
+  font-weight: 300;
+  color: rgb(253, 55, 0);
+}
+.err-type{
+  color: rgb(239, 116, 86);
+  font-size: 1.1rem;
+}
+.err-message{
+  font-size: 1.6rem;
+  color: rgb(244, 75, 42);
+}
+.err-trace{
+  font-size: 0.9rem;
+  color: rgb(250, 194, 177);
+}
