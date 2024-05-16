@@ -8,7 +8,7 @@ function App() {
   return (
     <>
     <Routes>
-      <Route path='/' element={<Home />} />
+      <Route path='AnimeBase/' element={<Home />} />
       <Route path='/anime/:id' element={<AnimeItem />}/>
       <Route path='/*' element={<Missing />}/>
     </Routes>
