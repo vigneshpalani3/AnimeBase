@@ -5,20 +5,18 @@ import AnimeTile from './AnimeTile'
 
 const SearchResults = () => {
 
-  const {searchResults,dispatch,searchResultsPageNo,getSearchResults} = UseGlobalContext();
+  const {searchResults,dispatch,searchResultsPageNo} = UseGlobalContext();
 
   function handlePage(mode){
 
-    console.log('entered handle page')
-    const currentPage = searchResults?.pagination.current_page;
     const nextPage = searchResults?.pagination?.has_next_page;
     
-    if(mode==='prev' && currentPage >1){
-      dispatch({type:"SEARCH_RESULT_PAGE",payload:searchResultsPageNo-1});
-      getSearchResults();
+    if(mode==='prev' && searchResultsPageNo>1){
+      const prevPage = searchResultsPageNo-1;
+      dispatch({type:"SEARCH_RESULT_PAGE",payload:prevPage});
     }else if(mode==='next' && nextPage){
-      dispatch({type:"SEARCH_RESULT_PAGE",payload:searchResultsPageNo+1});
-      getSearchResults();
+      const nextPage = searchResultsPageNo+1;
+      dispatch({type:"SEARCH_RESULT_PAGE",payload:nextPage});
     }
   }
 
@@ -29,14 +27,14 @@ const SearchResults = () => {
     (<>
     <div className='page-anime'>
       {
-        searchResults?.data?.map(item=>(
-          <AnimeTile item={item} key={item.mal_id} />
+        searchResults?.data?.map((item,index)=>(
+          <AnimeTile item={item} key={index} />
         ))
       }
     </div>
     <div className="page-nav-buttons">
       {
-        searchResults?.pagination?.current_page!==1&&
+        searchResultsPageNo!==1&&
         <button onClick={()=>handlePage('prev')}>Prev</button>
       }{
         searchResults?.pagination?.has_next_page&&

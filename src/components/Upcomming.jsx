@@ -1,23 +1,22 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import UseGlobalContext from '../context/GlobalContext'
 import '../styles/page.css'
 import AnimeTile from './AnimeTile'
 
 const Upcomming = () => {
 
-  const {upcommingAnime,dispatch,upcommingPageNo,getUpcommingAnime} = UseGlobalContext();
+  const {upcommingAnime,dispatch,upcommingPageNo} = UseGlobalContext();
 
   function handlePage(mode){
 
-    const currentPage = upcommingAnime?.pagination?.current_page;
-    const nextPage = upcommingAnime?.pagination?.has_next_page;
+    const hasNextPage = upcommingAnime?.pagination?.has_next_page;
 
-    if(mode==='prev' && currentPage>1){
-      dispatch({type:"UPCOMMING_PAGES",payload:upcommingPageNo-1});
-      getUpcommingAnime();
-    }else if(mode==='next' && nextPage){
-      dispatch({type:"UPCOMMING_PAGES",payload:upcommingPageNo+1});
-      getUpcommingAnime();
+    if(mode==='prev' && upcommingPageNo>1){
+      const prevPage = upcommingPageNo-1;
+      dispatch({type:"UPCOMMING_PAGES",payload:prevPage});
+    }else if(mode==='next' && hasNextPage){
+      const nextPage = upcommingPageNo+1;
+      dispatch({type:"UPCOMMING_PAGES",payload:nextPage});
     }
   }
 
@@ -33,7 +32,7 @@ const Upcomming = () => {
     </div>
     <div className="page-nav-buttons">
       {
-        upcommingAnime?.pagination?.current_page!==1&&
+        upcommingPageNo!==1&&
         <button onClick={()=>handlePage('prev')}>Prev</button>
       }{
         upcommingAnime?.pagination?.has_next_page&&

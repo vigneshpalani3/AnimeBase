@@ -1,23 +1,24 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import UseGlobalContext from '../context/GlobalContext'
 import '../styles/page.css'
 import AnimeTile from './AnimeTile'
 
 const Popular = () => {
 
-  const {popularAnime,dispatch,popularPageNo,getPopularAnime} = UseGlobalContext();
+  const {popularAnime,dispatch,popularPageNo} = UseGlobalContext();
 
-  function handlePage(mode){
+  function handlePopularPage(mode){
+    
+    const hasNextPage = popularAnime?.pagination?.has_next_page;
 
-    const currentPage = popularAnime?.pagination?.current_page;
-    const nextPage = popularAnime?.pagination?.has_next_page;
-    if(mode==='prev' && currentPage >1){
-      dispatch({type:"POPULAR_PAGES",payload:popularPageNo-1});
-      getPopularAnime();
-    }else if(mode==='next' && nextPage){
-      dispatch({type:"POPULAR_PAGES",payload:popularPageNo+1});
-      getPopularAnime();
+    if(mode==='prev' && popularPageNo>1){
+      const prevPage = popularPageNo-1;
+      dispatch({type:'POPULAR_PAGE',payload:prevPage});
+    }else if(mode==='next' && hasNextPage){
+      const nextPage = popularPageNo+1;
+      dispatch({type:"POPULAR_PAGE",payload:nextPage});
     }
+    console.log('page No :'+popularPageNo);
   }
 
   return (
@@ -32,11 +33,11 @@ const Popular = () => {
     </div>
     <div className="page-nav-buttons">
       {
-        popularAnime?.pagination?.current_page!==1&&
-        <button onClick={()=>handlePage('prev')}>Prev</button>
+        popularPageNo!==1 &&
+        <button onClick={()=>handlePopularPage('prev')}>Prev</button>
       }{
         popularAnime?.pagination?.has_next_page&&
-        <button onClick={()=>handlePage('next')}>Next</button>
+        <button onClick={()=>handlePopularPage('next')}>Next</button>
       }
     </div>
     </>

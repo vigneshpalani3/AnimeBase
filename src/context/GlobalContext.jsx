@@ -11,10 +11,10 @@ export const GlobalContextProvider = ({children}) => {
   const SEARCH_RESULT = "SEARCH_RESULT";
   const SEARCH_RESULT_PAGE = "SEARCH_RESULT_PAGE";
   const GET_POPULAR = "GET_POPULAR"; 
+  const POPULAR_PAGE ="POPULAR_PAGE"
   const GET_UPCOMMING = "GET_UPCOMMING";
   const GET_AIRING = "GET_AIRING";
   const ACTIVE = "ACTIVE";
-  const POPULAR_PAGES="POPULAR_PAGES";
   const UPCOMMING_PAGES="UPCOMMING_PAGES";
   const RANDOM = "RANDOM";
   const AIRING_PAGES="AIRING_PAGES";
@@ -45,27 +45,27 @@ export const GlobalContextProvider = ({children}) => {
         return {...state,isLoading:true};
       case LOADED:
         return {...state,isLoading:false};
-        case GET_POPULAR:
+      case GET_POPULAR:
         return {...state,popularAnime:action.payload};
+      case POPULAR_PAGE:
+        return {...state,popularPageNo:action.payload};
       case GET_AIRING:
         return {...state,airingAnime:action.payload};
-        case GET_UPCOMMING:
-          return {...state,upcommingAnime:action.payload};
-          case POPULAR_PAGES:
-        return {...state,popularPageNo:action.payload};
-      case UPCOMMING_PAGES:
-        return {...state,upcommingPageNo:action.payload};
       case AIRING_PAGES:
         return {...state,airingPageNo:action.payload};
+      case GET_UPCOMMING:
+          return {...state,upcommingAnime:action.payload};
+      case UPCOMMING_PAGES:
+        return {...state,upcommingPageNo:action.payload};
       case SEARCH_RESULT:
         return {...state,searchResults:action.payload};
       case SEARCH_RESULT_PAGE:
         return {...state,searchResultsPageNo:action.payload};
-        case RECOMMEND:
+      case RECOMMEND:
           return {...state,recommendation:action.payload};
-        case RANDOM:
+      case RANDOM:
         return {...state,randomAnime:action.payload};
-        case ERROR:
+      case ERROR:
         return {...state,errorMsg:action.payload};
       case ACTIVE:
         return {...state,active:action.payload};
@@ -74,7 +74,7 @@ export const GlobalContextProvider = ({children}) => {
 
   const [state,dispatch] = useReducer(reducer,initialState);
   const [searchString,setSearchString] = useState('');
-  
+  const [input,setInput] = useState('');
 
   // Run functions to get the data from api
   useEffect(()=>{
@@ -94,15 +94,26 @@ export const GlobalContextProvider = ({children}) => {
       case "recommend":
         getRecommendation();
         break;
+      case "search":
+        if(searchString) getSearchResults();
     }
+    window.scrollTo(0,0);
     if(state.active!=='search') setSearchString('');
-  },[state.active])
+  },
+  [
+    state.active,
+    state.popularPageNo,
+    state.airingPageNo,
+    state.upcommingPageNo,
+    state.searchResultsPageNo,
+    searchString
+  ]);
 
   //get popular anime
   async function getPopularAnime(){
     try{
       dispatch({type:LOADING});
-      const responce = await fetch(`${baseUrl}/top/anime?filter=bypopularity&page=${state.popularPageNo}`);
+      const responce = await fetch(`${baseUrl}/top/anime?filter=bypopularity&page=${state.popularPageNo}&sfw`);
       const data = await responce.json();
       if(responce.ok){
         dispatch({type:GET_POPULAR,payload:data});
@@ -114,16 +125,17 @@ export const GlobalContextProvider = ({children}) => {
     }catch(err){
       console.log(err);
     }
+
   }
   
   // get this season anime
   async function getAiringAnime(){
     try{
       dispatch({type:LOADING});
-      const responce = await fetch(`${baseUrl}/seasons/now?page=${state.airingPageNo}`);
+      const responce = await fetch(`${baseUrl}/seasons/now?page=${state.airingPageNo}&sfw`);
       const data = await responce.json();
       if(responce.ok){
-        dispatch({type:GET_AIRING,payload:data})
+        dispatch({type:GET_AIRING,payload:data});
       }else{
         dispatch({type:"ACTIVE",payload:'error'});
         dispatch({type:"ERROR",payload:data});
@@ -138,7 +150,7 @@ export const GlobalContextProvider = ({children}) => {
   async function getUpcommingAnime(){
     try{
       dispatch({type:LOADING});
-      const responce = await fetch(`${baseUrl}/seasons/upcoming?page=${state.upcommingPageNo}`);
+      const responce = await fetch(`${baseUrl}/seasons/upcoming?page=${state.upcommingPageNo}&sfw`);
       const data = await responce.json();
       if(responce.ok){
         dispatch({type:GET_UPCOMMING,payload:data});
@@ -172,9 +184,10 @@ export const GlobalContextProvider = ({children}) => {
 
   // function to handle submit of search bar
   function handleSumbit(e){
+    dispatch({type:SEARCH_RESULT_PAGE,payload:1});
     e.preventDefault();
+    setSearchString(input);
     dispatch({type:ACTIVE,payload:'search'})
-    getSearchResults();
   }
 
   // function get random anime
@@ -218,14 +231,11 @@ export const GlobalContextProvider = ({children}) => {
       ...state,
       handleSumbit,
       dispatch,
-      getPopularAnime,
-      getUpcommingAnime,
-      getAiringAnime,
       searchString,
       setSearchString,
       getRandomAnime,
-      getSearchResults,
-      getRecommendation
+      input,
+      setInput
     }}>
       {children}
     </GlobalContext.Provider>

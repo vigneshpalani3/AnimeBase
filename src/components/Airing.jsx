@@ -5,19 +5,18 @@ import AnimeTile from './AnimeTile'
 
 const Airing = () => {
 
-  const {airingAnime,dispatch,airingPageNo,getAiringAnime} = UseGlobalContext();
+  const {airingAnime,dispatch,airingPageNo} = UseGlobalContext();
 
   function handlePage(mode){
 
-    const currentPage = airingAnime?.pagination?.current_page;
-    const nextPage = airingAnime?.pagination?.has_next_page;
+    const hasNextPage = airingAnime?.pagination?.has_next_page;
 
-    if(mode==='prev' && currentPage>1){
-      dispatch({type:"AIRING_PAGES",payload:airingPageNo-1});
-      getAiringAnime();
-    }else if(mode==='next' && nextPage){
-      dispatch({type:"AIRING_PAGES",payload:airingPageNo+1});
-      getAiringAnime();
+    if(mode==='prev' && airingPageNo>1){
+      const prevPage = airingPageNo-1;
+      dispatch({type:"AIRING_PAGES",payload:prevPage});
+    }else if(mode==='next' && hasNextPage){
+      const nextPage = airingPageNo+1;
+      dispatch({type:"AIRING_PAGES",payload:nextPage});
     }
   }
 
@@ -34,7 +33,7 @@ const Airing = () => {
     </div>
     <div className="page-nav-buttons">
       {
-        airingAnime?.pagination?.current_page!==1&&
+        airingPageNo!==1&&
         <button onClick={()=>handlePage('prev')}>Prev</button>
       }{
         airingAnime?.pagination?.has_next_page&&

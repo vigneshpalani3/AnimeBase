@@ -14,13 +14,13 @@
 }
 .err-type{
   color: rgb(239, 116, 86);
-  font-size: 1.1rem;
+  font-size: var(--fs-m);
 }
 .err-message{
-  font-size: 1.6rem;
+  font-size: var(--fs-b);
   color: rgb(244, 75, 42);
 }
 .err-trace{
-  font-size: 0.9rem;
+  font-size: var(--fs-s);
   color: rgb(250, 194, 177);
 }
