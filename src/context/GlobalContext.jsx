@@ -20,6 +20,7 @@ export const GlobalContextProvider = ({children}) => {
   const AIRING_PAGES="AIRING_PAGES";
   const ERROR = "ERROR";
   const RECOMMEND = "RECOMMEND";
+  const SEASON_LIST= "SEASON_LIST";
 
   // Initial state
   const initialState = {
@@ -32,10 +33,11 @@ export const GlobalContextProvider = ({children}) => {
     searchResults:[],
     searchResultsPageNo:1,
     recommendation:[],
+    seasonList:[],
     errorMsg:[],
     randomAnime:[],
     isLoading:false,
-    active:'popular',
+    active:'seasonList',
   }
 
   //creating a Reducer
@@ -61,8 +63,10 @@ export const GlobalContextProvider = ({children}) => {
         return {...state,searchResults:action.payload};
       case SEARCH_RESULT_PAGE:
         return {...state,searchResultsPageNo:action.payload};
+      case SEASON_LIST:
+        return {...state,seasonList:action.payload}
       case RECOMMEND:
-          return {...state,recommendation:action.payload};
+        return {...state,recommendation:action.payload};
       case RANDOM:
         return {...state,randomAnime:action.payload};
       case ERROR:
@@ -94,8 +98,12 @@ export const GlobalContextProvider = ({children}) => {
       case "recommend":
         getRecommendation();
         break;
+      case "seasonList":
+        getSeasonList();
+        break;
       case "search":
         if(searchString) getSearchResults();
+        break;
     }
     window.scrollTo(0,0);
     if(state.active!=='search') setSearchString('');
@@ -223,6 +231,23 @@ export const GlobalContextProvider = ({children}) => {
       dispatch({type:LOADED});
     }catch(err){
       console.log(err);
+    }
+  }
+
+  async function getSeasonList(){
+    try{
+      dispatch({type:LOADING})
+      const responce = await fetch(`${baseUrl}/seasons`)
+      const data = await responce.json()
+      if(responce.ok){
+        dispatch({type:SEASON_LIST,payload:data.data})
+      }else{
+        dispatch({type:"ACTIVE",payload:'error'});
+        dispatch({type:"ERROR",payload:data});
+      }
+      dispatch({type:LOADED})
+    }catch(err){
+      console.log(err)
     }
   }
 

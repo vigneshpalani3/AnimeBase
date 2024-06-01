@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { act, useEffect, useState } from 'react'
 import { Squash as Hamburger } from 'hamburger-react'
 import '../styles/home.css'
 import SideBar from './SideBar';
@@ -14,6 +14,7 @@ import Error from './Error';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Recommend from './Recommend';
+import Seasons from './Seasons';
 
 const Home = () => {
 
@@ -63,7 +64,8 @@ const Home = () => {
             active==='search'?<SearchResults />:
             active==='random'?<Random />:
             active==='recommend'?<Recommend />:
-            active==='error'?<Error />:null
+            active==='error'?<Error />:
+            active==='seasonList'?<Seasons />:null
           )
         }
         <ToastContainer

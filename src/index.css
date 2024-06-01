@@ -8,6 +8,10 @@
   color: rgb(230, 229, 229);
 }
 
+html{
+  scroll-behavior: smooth;
+}
+
 :root{
 
   /* COLORS */
