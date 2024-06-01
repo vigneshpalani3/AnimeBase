@@ -4,7 +4,7 @@ import '../styles/animeTile.css'
 
 const AnimeTile = ({item}) => {
   return (
-    <Link to={`anime/${item.mal_id}`}>
+    <Link to={`/anime/${item.mal_id}`}>
       <div className="item-tile">
         <img className='item-tile-thumb' src={item.images.jpg.large_image_url} alt="" />
         <div className="item-tile-overlay">

@@ -34,6 +34,10 @@ const SideBar = ({isOpen,setIsOpen}) => {
         className={`option ${active==='recommend'&&'active'}`}
         onClick={()=>handleActive('recommend')}
       >Recommendations</button>
+      <button
+        className={`option ${active==='seasonList'&&'active'}`}
+        onClick={()=>handleActive('seasonList')}
+      >Seasons</button>
     </div>
   )
 }

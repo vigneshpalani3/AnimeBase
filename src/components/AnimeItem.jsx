@@ -34,6 +34,7 @@ const AnimeItem = () => {
     getAnime();
     getCharacters();
     dispatch({type:"LOADED"});
+    window.scrollTo(0,0)
   },[]);
 
   async function getCharacters(){

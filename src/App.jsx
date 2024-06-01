@@ -12,7 +12,7 @@ function App() {
       <Route path='/' element={<Home />} />
       <Route path='/anime/:id' element={<AnimeItem />}/>
       <Route path='/*' element={<Missing />}/>
-      <Route path='/season/:year/:season' element={<SeasonalAnime />}/>
+      <Route path='season/:year/:season' element={<SeasonalAnime />}/>
     </Routes>
     </>
   )

@@ -37,7 +37,7 @@ export const GlobalContextProvider = ({children}) => {
     errorMsg:[],
     randomAnime:[],
     isLoading:false,
-    active:'seasonList',
+    active:'popular',
   }
 
   //creating a Reducer
